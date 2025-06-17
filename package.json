@@ -1,0 +1,17 @@
+{
+  "name": "logistics-poc",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.12.1",
+  "dependencies": {
+    "@types/node": "^24.0.3",
+    "drizzle-kit": "^0.31.1",
+    "drizzle-orm": "^0.44.2",
+    "hono": "^4.7.11",
+    "mssql": "^11.0.1",
+    "pg": "^8.16.0"
+  }
+}
