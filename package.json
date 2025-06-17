@@ -6,12 +6,24 @@
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.12.1",
+  "scripts": {
+    "dev": "bun run --hot index.ts",
+    "start": "bun run index.ts",
+    "test:performance": "bun run run-test.ts",
+    "test:performance:quick": "bun run run-test.ts --quick",
+    "test:performance:keep": "bun run run-test.ts --keep-data",
+    "db:migrate": "drizzle-kit migrate",
+    "db:generate": "drizzle-kit generate",
+    "db:studio": "drizzle-kit studio"
+  },
   "dependencies": {
     "@types/node": "^24.0.3",
+    "date-fns": "^4.1.0",
     "drizzle-kit": "^0.31.1",
     "drizzle-orm": "^0.44.2",
     "hono": "^4.7.11",
     "mssql": "^11.0.1",
-    "pg": "^8.16.0"
+    "pg": "^8.16.0",
+    "zod": "^3.25.67"
   }
 }
