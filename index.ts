@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { db } from "./db";
-import { deliveries, deliveryGroups } from "./db/schema";
+import { deliveries, deliveryGroups, orders } from "./db/schema";
 import { eq } from "drizzle-orm";
 import { runIntensivePerformanceTest } from "./test-performance";
 import { insertOrder } from "./handlers";
@@ -18,6 +18,12 @@ app.post("/assign-order", async (c) => {
 
 app.get("/get-deliveries", async (c) => {
   const result = await db.transaction(async (tx) => {
+    const orderRes = await tx.query.orders.findFirst({
+      where: eq(orders.orderNumber, 100000),
+    });
+    if (!orderRes) {
+      throw new Error("Order not found");
+    }
     return await tx.query.deliveries.findMany({
       with: {
         order: {},
@@ -26,7 +32,7 @@ app.get("/get-deliveries", async (c) => {
         deliveryGroup: {},
         dispute: {},
       },
-      where: eq(deliveries.orderId, 1),
+      where: eq(deliveries.orderId, orderRes.id),
     });
   });
 

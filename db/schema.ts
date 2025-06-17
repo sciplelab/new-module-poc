@@ -1,6 +1,7 @@
 import { pgTable as table, pgEnum, boolean } from "drizzle-orm/pg-core";
 import * as t from "drizzle-orm/pg-core";
 import { InferInsertModel, InferSelectModel, relations } from "drizzle-orm";
+import cuid from "cuid";
 
 // Timestamps
 const timestamps = {
@@ -1477,15 +1478,12 @@ export const peakseasonForecastsRelations = relations(
     }),
   })
 );
-
 export const deliveryGroups = table("delivery_groups", {
   id: t.integer("id").primaryKey().generatedAlwaysAsIdentity(),
   groupKey: t
     .text("group_key")
     .unique()
-    .$defaultFn(() => {
-      return `A${Math.floor(100000 + Math.random() * 900000)}`;
-    }),
+    .$defaultFn(() => cuid()),
   driverId: t.integer("driver_id").references(() => users.id),
   totalDistance: t.integer("total_distance"),
   totalFees: t.integer("total_fees"),

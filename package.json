@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@types/node": "^24.0.3",
+    "cuid": "^3.0.0",
     "date-fns": "^4.1.0",
     "drizzle-kit": "^0.31.1",
     "drizzle-orm": "^0.44.2",
